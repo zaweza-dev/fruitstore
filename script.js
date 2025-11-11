@@ -7,12 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalBelanjaSpan = document.getElementById('total-belanja');
     const ongkirSpan = document.getElementById('ongkir');
     const grandTotalSpan = document.getElementById('grand-total');
+    const biayaTambahanSpan = document.getElementById('biaya-tambahan');
+    const biayaTambahanRow = document.querySelector('.biaya-tambahan-row'); // Tambahkan elemen ini
     const pembayaranForm = document.getElementById('pembayaran-form');
     const checkoutButton = document.getElementById('checkout-button');
     const peringatanKeranjang = document.getElementById('peringatan-keranjang');
     
     // Nomor WhatsApp tujuan
-    // Telah disetel ke 6285136236798 sesuai permintaan.
     const WHATSAPP_NUMBER = '6285136236798'; // NOMOR TELAH DIUBAH
     
     // === State Keranjang ===
@@ -43,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (detailElement) {
                 detailElement.style.display = 'block';
             }
-            updateGrandTotal();
+            hitungTotal(); // Panggil hitungTotal untuk update Grand Total
         });
     });
 
@@ -61,6 +62,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (metodeBayarTerpilih === 'cod') {
             biayaTambahan = BIAYA_COD;
+            biayaTambahanRow.style.display = 'flex'; // Tampilkan baris biaya tambahan
+            biayaTambahanSpan.textContent = formatRupiah(BIAYA_COD);
+        } else {
+            biayaTambahanRow.style.display = 'none'; // Sembunyikan baris biaya tambahan
+            biayaTambahanSpan.textContent = formatRupiah(0);
         }
 
         let grandTotal = subtotal + ongkosKirim + biayaTambahan;
@@ -72,15 +78,12 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Aktifkan/nonaktifkan tombol checkout
         const isKeranjangEmpty = keranjang.length === 0;
-        checkoutButton.disabled = isKeranjangEmpty;
+        const isPaymentSelected = metodeBayarTerpilih !== undefined;
+        checkoutButton.disabled = isKeranjangEmpty || !isPaymentSelected; // Tombol nonaktif jika keranjang kosong ATAU pembayaran belum dipilih
         peringatanKeranjang.style.display = isKeranjangEmpty ? 'block' : 'none';
         
         return { subtotal, grandTotal, ongkosKirim, biayaTambahan };
     };
-
-    const updateGrandTotal = () => {
-            hitungTotal(); // Hanya panggil untuk update tampilan total
-    }
 
     // Merender ulang daftar keranjang
     const renderKeranjang = () => {
@@ -89,15 +92,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (keranjang.length === 0) {
             const li = document.createElement('li');
             li.textContent = "Keranjang Anda kosong.";
+            li.style.cssText = "justify-content: center; color: #999;";
             daftarKeranjang.appendChild(li);
         } else {
             keranjang.forEach(item => {
                 const li = document.createElement('li');
                 li.innerHTML = `
                     <span>${item.nama} (x${item.qty})</span>
-                    <span>${formatRupiah(item.harga * item.qty)} 
-                        <button class="remove-item" data-id="${item.id}" data-qty="1">Hapus 1</button>
-                        <button class="remove-item-all" data-id="${item.id}">Hapus Semua</button>
+                    <span>
+                        ${formatRupiah(item.harga * item.qty)} 
+                        <button class="remove-item" data-id="${item.id}" title="Hapus 1 Item">Hapus 1</button>
+                        <button class="remove-item-all" data-id="${item.id}" title="Hapus Semua Item">Semua</button>
                     </span>
                 `;
                 daftarKeranjang.appendChild(li);
@@ -123,7 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             renderKeranjang();
-            // Notifikasi penambahan produk dihilangkan agar tidak mengganggu
         });
     });
     
@@ -167,10 +171,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = Object.fromEntries(formData.entries());
         const { grandTotal, subtotal, ongkosKirim, biayaTambahan } = hitungTotal();
         
-        // Ambil label pembayaran yang dipilih (misal: "💳 E-Wallet...")
+        // Ambil label pembayaran yang dipilih
         const metodeBayarLabelElement = document.querySelector(`input[name="metode_bayar"][value="${data.metode_bayar}"] + label`);
         const metodeBayarLabel = metodeBayarLabelElement ? metodeBayarLabelElement.textContent.trim() : data.metode_bayar.toUpperCase();
-
 
         // 2. Buat Teks Pesan
         let pesan = `*Pemesanan Buah Segar Baru*\n\n`;
@@ -202,7 +205,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Opsional: Reset form dan keranjang setelah redirect
         setTimeout(() => {
-            // Tampilkan pesan sukses sebelum reset
             alert("Pemesanan berhasil! Anda akan diarahkan ke WhatsApp untuk konfirmasi dan pembayaran. Tekan kirim di WhatsApp.");
             
             keranjang = [];
