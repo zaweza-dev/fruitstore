@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toko Buah Segar Online | Checkout</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -14,6 +15,7 @@
             <nav>
                 <a href="#produk">Produk</a>
                 <a href="#cara-pesan">Cara Pesan</a>
+                <a href="#checkout">Checkout</a>
             </nav>
         </div>
     </header>
@@ -56,8 +58,9 @@
                     <h3>Daftar Belanja Anda</h3>
                     <ul id="daftar-keranjang">
                         </ul>
-                    <p class="keranjang-total">Total Belanja: <span id="total-belanja">Rp 0</span></p>
+                    <p class="keranjang-total">Subtotal: <span id="total-belanja">Rp 0</span></p>
                     <p class="keranjang-total">Ongkos Kirim: <span id="ongkir">Rp 10.000</span></p>
+                    <p class="keranjang-total biaya-tambahan-row" style="display: none;">Biaya COD: <span id="biaya-tambahan">Rp 0</span></p>
                     <p class="grand-total">**Total Bayar:** <span id="grand-total">**Rp 10.000**</span></p>
                 </div>
 
@@ -73,7 +76,7 @@
                     </div>
                     <div class="form-group">
                         <label for="telepon">Nomor Telepon</label>
-                        <input type="tel" id="telepon" name="telepon" required>
+                        <input type="tel" id="telepon" name="telepon" placeholder="Contoh: 081234567890" required>
                     </div>
 
                     <hr>
@@ -111,14 +114,14 @@
         </section>
 
         <section id="cara-pesan" class="container">
-            <h2>Cara Pemesanan</h2>
+            <h2>Cara Pemesanan 📝</h2>
             <ol>
                 <li>Pilih buah yang Anda inginkan dari bagian **Produk**.</li>
                 <li>Klik tombol **Tambah ke Keranjang**.</li>
                 <li>Cek ulang pesanan Anda di bagian **Keranjang & Checkout**.</li>
                 <li>Isi **Informasi Pengiriman** dengan lengkap.</li>
                 <li>Pilih **Metode Pembayaran** yang Anda inginkan.</li>
-                <li>Klik **Bayar Sekarang** dan ikuti instruksi pembayaran.</li>
+                <li>Klik **Bayar Sekarang** dan ikuti instruksi pembayaran di WhatsApp.</li>
             </ol>
         </section>
 
@@ -133,4 +136,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
