@@ -1,9 +1,10 @@
 /* General Styling */
 :root {
-    --primary-color: #4CAF50; /* Hijau Buah */
-    --secondary-color: #FF9800; /* Oranye */
+    --primary-color: #008744; /* Hijau Segar Baru */
+    --secondary-color: #FFA500; /* Oranye Terang */
+    --accent-color: #D32F2F; /* Merah untuk Hapus/Peringatan */
     --text-color: #333;
-    --light-bg: #f7f7f7;
+    --light-bg: #f5fcf5; /* Background sangat lembut */
     --white-bg: #ffffff;
 }
 
@@ -14,14 +15,14 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Poppins', sans-serif; /* Menggunakan Poppins */
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--light-bg);
 }
 
 .container {
-    width: 90%;
+    width: 95%; /* Lebih lebar di HP */
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px 0;
@@ -32,7 +33,10 @@ header {
     background-color: var(--primary-color);
     color: var(--white-bg);
     padding: 15px 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky; /* Sticky Header */
+    top: 0;
+    z-index: 100;
 }
 
 .header-content {
@@ -42,15 +46,16 @@ header {
 }
 
 header h1 {
-    font-size: 1.8em;
+    font-size: 1.6em; /* Lebih kecil di HP */
 }
 
 nav a {
     color: var(--white-bg);
     text-decoration: none;
-    margin-left: 20px;
+    margin-left: 15px;
     font-weight: 500;
     transition: color 0.3s;
+    font-size: 0.9em; /* Lebih kecil di HP */
 }
 
 nav a:hover {
@@ -59,55 +64,59 @@ nav a:hover {
 
 /* Section Styling */
 main section {
-    padding: 40px 0;
+    padding: 30px 0;
     background-color: var(--white-bg);
-    margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 h2 {
     text-align: center;
     color: var(--primary-color);
-    margin-bottom: 30px;
-    font-size: 2em;
+    margin-bottom: 25px;
+    font-size: 1.8em; /* Lebih kecil di HP */
+    font-weight: 700;
 }
 
 /* Produk Grid */
 .produk-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsif */
+    gap: 20px;
 }
 
 .produk-item {
     background-color: var(--white-bg);
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    border: 1px solid #eee;
+    border-radius: 10px;
     padding: 15px;
     text-align: center;
     transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
 }
 
 .produk-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-8px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
 }
 
 .produk-item img {
     width: 100%;
-    height: auto;
-    border-radius: 6px;
+    max-height: 150px; /* Batasi tinggi gambar */
+    object-fit: cover;
+    border-radius: 8px;
     margin-bottom: 10px;
 }
 
 .produk-item h3 {
     color: var(--text-color);
     margin: 10px 0 5px;
+    font-size: 1.1em;
 }
 
 .produk-item .deskripsi {
-    font-size: 0.9em;
+    font-size: 0.85em;
     color: #666;
     margin-bottom: 10px;
 }
@@ -115,7 +124,7 @@ h2 {
 .produk-item .harga {
     color: var(--secondary-color);
     font-size: 1.2em;
-    font-weight: bold;
+    font-weight: 700;
     margin-bottom: 15px;
 }
 
@@ -125,14 +134,16 @@ button {
     color: white;
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 20px; /* Sudut lebih membulat */
     cursor: pointer;
     font-size: 1em;
-    transition: background-color 0.3s;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.1s;
 }
 
 button:hover {
-    background-color: #388E3C;
+    background-color: #006830;
+    transform: scale(1.02);
 }
 
 .tombol-bayar {
@@ -153,63 +164,78 @@ button:hover {
 .checkout-content {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    gap: 40px;
+    gap: 30px;
 }
 
 @media (max-width: 768px) {
     .checkout-content {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Stack di HP */
     }
 }
 
 .keranjang-detail {
     background-color: var(--light-bg);
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 10px;
     border: 1px solid #ddd;
     align-self: flex-start;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .keranjang-detail h3 {
     margin-top: 0;
-    border-bottom: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--secondary-color);
     padding-bottom: 10px;
 }
 
 #daftar-keranjang {
     list-style: none;
     padding: 10px 0;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 #daftar-keranjang li {
-    padding: 8px 0;
+    padding: 10px 0;
     border-bottom: 1px dotted #ccc;
     display: flex;
+    flex-wrap: wrap; /* Penting untuk responsif */
     justify-content: space-between;
+    align-items: center;
+    font-size: 0.95em;
+}
+
+#daftar-keranjang li span:first-child {
+    max-width: 60%;
+}
+#daftar-keranjang li span:last-child {
+    text-align: right;
+    display: flex;
     align-items: center;
 }
 
+
 .keranjang-total, .grand-total {
-    margin: 10px 0;
+    margin: 8px 0;
     padding-top: 5px;
     border-top: 1px solid #eee;
 }
 
 .grand-total {
-    font-size: 1.3em;
-    color: var(--primary-color);
-    font-weight: bold;
+    font-size: 1.4em;
+    color: var(--accent-color);
+    font-weight: 700;
     border-top: 2px solid var(--primary-color);
     padding-top: 10px;
+    margin-top: 15px;
 }
 
 /* Form Styling */
 #pembayaran-form {
     background-color: var(--white-bg);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .form-group {
@@ -226,61 +252,66 @@ button:hover {
 .form-group input[type="tel"],
 .form-group textarea {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 8px; /* Lebih membulat */
     font-size: 1em;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.form-group textarea {
-    resize: vertical;
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(0, 135, 68, 0.3);
+    outline: none;
 }
+
 
 /* Payment Options */
 .pilihan-pembayaran {
     margin-bottom: 15px;
-    padding: 10px;
-    border: 1px solid #eee;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.pilihan-pembayaran label {
-    cursor: pointer;
-    font-weight: normal;
-    display: inline-block;
-    margin-left: 5px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
 .pilihan-pembayaran input[type="radio"]:checked + label {
     font-weight: bold;
     color: var(--primary-color);
 }
+.pilihan-pembayaran input[type="radio"]:checked {
+    accent-color: var(--primary-color); /* Warna radio button */
+}
 
 .detail-bayar {
-    background-color: #f0f8f0;
-    border-left: 3px solid var(--primary-color);
+    background-color: #e6ffe6; /* Warna latar belakang detail */
+    border-left: 4px solid var(--primary-color);
     padding: 10px;
     margin-top: 10px;
+    border-radius: 5px;
     display: none; /* Default hidden, managed by JS */
     font-size: 0.9em;
 }
 
 .peringatan {
-    color: #D32F2F; /* Merah */
-    background-color: #FFEBEE;
+    color: var(--accent-color); /* Merah */
+    background-color: #fff0f0;
     padding: 10px;
     border-radius: 5px;
     margin-top: 10px;
     text-align: center;
     font-weight: bold;
+    border: 1px solid var(--accent-color);
 }
 
-.remove-item {
-    background-color: #D32F2F;
+.remove-item, .remove-item-all {
+    background-color: var(--accent-color);
     padding: 3px 8px;
-    font-size: 0.8em;
-    margin-left: 10px;
+    font-size: 0.75em;
+    margin-left: 5px;
+    border-radius: 15px;
+    font-weight: 400;
 }
 
 /* Footer */
@@ -288,34 +319,35 @@ footer {
     background-color: var(--text-color);
     color: var(--light-bg);
     text-align: center;
-    padding: 20px 0;
+    padding: 15px 0;
     margin-top: 20px;
 }
 
-footer p {
-    margin: 0;
-}
-
-/* --- PENYESUAIAN UNTUK MENENGAHKAN CARA PEMESANAN --- */
-
-#cara-pesan ol {
-    /* Mengurangi lebar maksimum menjadi 500px agar lebih fokus di tengah */
-    max-width: 500px; 
-    /* Menengahkan blok daftar (ol) di dalam container */
-    margin: 0 auto;
-    /* Menengahkan teks di dalam list item */
+/* Cara Pesan Styling */
+#cara-pesan {
     text-align: center;
-    /* Memberi padding horizontal agar tidak terlalu mepet */
-    padding-left: 20px;
-    padding-right: 20px;
+}
+#cara-pesan ol {
+    max-width: 500px; 
+    margin: 15px auto 0; /* Jarak atas */
+    text-align: left; /* Teks daftar ke kiri */
+    padding-left: 40px;
+    font-size: 1.05em;
 }
 
 #cara-pesan li {
-    /* Pastikan list item tidak terlalu rapat */
-    margin-bottom: 10px;
-    /* Atur teks alignment ke kiri (default) di dalam li */
-    text-align: left;
-    /* Membuat list item sebagai block */
-    display: block; 
+    margin-bottom: 12px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #eee;
 }
 
+/* Media Query untuk Tablet/Desktop */
+@media (min-width: 769px) {
+    header h1 {
+        font-size: 2em;
+    }
+    nav a {
+        font-size: 1em;
+        margin-left: 30px;
+    }
+}
