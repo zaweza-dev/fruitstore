@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const peringatanKeranjang = document.getElementById('peringatan-keranjang');
     
     // Nomor WhatsApp tujuan
-    // Telah disetel ke 6285692128064 sesuai permintaan.
-    const WHATSAPP_NUMBER = '6285692128064'; 
+    // Telah disetel ke 6285136236798 sesuai permintaan.
+    const WHATSAPP_NUMBER = '6285136236798'; // NOMOR TELAH DIUBAH
     
     // === State Keranjang ===
     let keranjang = [];
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const updateGrandTotal = () => {
-         hitungTotal(); // Hanya panggil untuk update tampilan total
+            hitungTotal(); // Hanya panggil untuk update tampilan total
     }
 
     // Merender ulang daftar keranjang
@@ -215,4 +215,3 @@ document.addEventListener('DOMContentLoaded', () => {
     // Inisialisasi tampilan keranjang
     renderKeranjang();
 });
-
